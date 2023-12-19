@@ -1,2 +1,1 @@
-# parking-lot
-Machine code for a parking lot
+Swagger is available at http://localhost:8080/swagger-ui/index.html
