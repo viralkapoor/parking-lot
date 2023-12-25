@@ -1,4 +1,4 @@
-package com.viral.parkingLot;
+package com.viral.parkingLot.component;
 
 import lombok.extern.log4j.Log4j2;
 

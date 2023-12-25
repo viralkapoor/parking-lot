@@ -1,0 +1,60 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+package controller {
+    class ParkingLotController {
+        ParkingLotComponent parkingLotComponent
+        CreateParkingLotResponse createParkingLot(createParkingLotRequest)
+        UpdateParkingLotResponse updateParkingLot(updateParkingLotRequest)
+        ParkVehicleResponse parkAVehicle(parkVehicleRequest)
+        UnParkVehicleResponse unParkAVehicle(unParkVehicleRequest)
+        ParkingLotStatusResponse getParkingLotStatus(parkingLotStatusRequest)
+    }
+}
+
+package component {
+    interface ParkingLotComponent {
+        ParkingLotStatus createParkingLot(parkingLotMetadata)
+        ParkingLotStatus updateParkingLot(parkingLotMetadata)
+        Ticket parkAVehicle(vehicle)
+        void unParkAVehicle(ticket)
+        ParkingLotStatus getParkingLotStatus(parkingLotId)
+    }
+
+    class ParkingLotComponentImpl implements ParkingLotComponent {
+    }
+}
+
+package builder {
+    interface ParkingLotBuilder {
+        ParkingLot createParkingLot(parkingLotMetadata)
+        ParkingLot updateParkingLot(parkingLotMetadata)
+        ParkingSlot getFreeSlot(vehicle)
+        ParkingSlot freeASlot(ticket)
+        ParkingLot getParkingLot(parkingLotId)
+    }
+    class ParkingLotBuilderImpl implements ParkingLotBuilder {
+        Dao parkingLotDao;
+    }
+}
+
+package dao {
+    interface Dao {
+        T createObject()
+        T getObject()
+        T updateObject()
+    }
+    class MemoryDao implements Dao{
+    }
+}
+
+package model {
+    class Vehicle {
+    }
+
+}
+
+ParkingLotController --> ParkingLotComponent
+ParkingLotComponentImpl --> ParkingLotBuilder
+ParkingLotBuilderImpl --> Dao
+@enduml
